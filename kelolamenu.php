@@ -68,7 +68,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
                     <p>Halaman Admin</p>
                 </div>
                 <nav class="nav flex-column">
-                    <a href="index.html" class="nav-link text-white">Logout</a>
+                    <a href="login.php" class="nav-link text-white">Logout</a>
                 </nav>
             </div>
 
