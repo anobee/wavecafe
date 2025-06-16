@@ -1,19 +1,15 @@
-CREATE TABLE IF NOT EXISTS admin (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(50) NOT NULL UNIQUE,
-    password VARCHAR(255) NOT NULL
-);
+-- DROP kalau sudah pernah ada (opsional untuk development)
+DROP TABLE IF EXISTS users;
 
-INSERT INTO admin (username, password) VALUES
-('admin', 'admin123');
-
-CREATE TABLE pengguna (
+-- Buat tabel users (admin dan user masuk ke sini semua)
+CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     role ENUM('admin', 'user') NOT NULL
 );
 
-INSERT INTO pengguna (username, password, role) VALUES
+-- Masukkan data admin dan user
+INSERT INTO users (username, password, role) VALUES
 ('admin', 'admin123', 'admin'),
 ('user', 'user123', 'user');

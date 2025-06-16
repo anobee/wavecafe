@@ -1,222 +1,477 @@
 <?php
 session_start();
-if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'user') {
-    header("Location: login.php");
+if (!isset($_SESSION['role']) || $_SESSION['role'] != 'user') {
+    header('Location: login.php');
     exit;
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-    <title>Kelola Menu - Wave Cafe</title>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Add Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <style>
-        .admin-button {
-            font-size: 1rem;
-            padding: 8px 16px;
-            margin-top: 10px;
-            margin-right: 8px;
-            color: white;
-            background-color: #339999;
-            border: none;
-            border-radius: 5px;
-            font-family: 'Open Sans', sans-serif;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .admin-button:hover {
-            background-color: #2b7a7a;
-        }
-
-        .tm-gallery-item {
-            background-color: rgba(255, 255, 255, 0.95);
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-            text-align: center;
-        }
-
-        .tm-video-wrapper {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: -1;
-        }
-
-        #tm-video {
-            object-fit: cover;
-            width: 100%;
-            height: 100%;
-        }
-    </style>
+    <title>Beranda User - WaveCafe</title>
+    <link rel="stylesheet" href="fontawesome/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet" />
+    <link rel="stylesheet" href="css/tooplate-wave-cafe.css">
 </head>
 <body>
-    <div class="container-fluid">
-        <div class="row">
-            <!-- Sidebar -->
-            <div class="col-md-3 col-lg-2 bg-dark text-white p-4">
-                <div class="text-center mb-4">
-                    <h1 class="h3">Wave Cafe</h1>
-                    <p>Halaman Admin</p>
+    <div class="container">
+        <h1>Selamat datang, <?= htmlspecialchars($_SESSION['username']) ?>!</h1>
+        <p>Anda login sebagai <strong>user</strong>.</p>
+        <a href="logout.php">Logout</a>
+    </div>
+</body>
+<body>
+    <p>Redirecting to <a href="login.php">login.php</a>...</p>
+</body>
+  <div class="tm-container">
+    <div class="tm-row">
+      <!-- Site Header -->
+      <div class="tm-left">
+        <div class="tm-left-inner">
+          <div class="tm-site-header">
+            <i class="fas fa-coffee fa-3x tm-site-logo"></i>
+            <h1 class="tm-site-name">Wave Cafe</h1>
+          </div>
+          <nav class="tm-site-nav">
+            <ul class="tm-site-nav-ul">
+              <li class="tm-page-nav-item">
+                <a href="#drink" class="tm-page-link active">
+                  <i class="fas fa-mug-hot tm-page-link-icon"></i>
+                  <span>Drink Menu</span>
+                </a>
+              </li>
+              <li class="tm-page-nav-item">
+                <a href="#about" class="tm-page-link">
+                  <i class="fas fa-users tm-page-link-icon"></i>
+                  <span>About Us</span>
+                </a>
+              </li>
+              <li class="tm-page-nav-item">
+                <a href="#special" class="tm-page-link">
+                  <i class="fas fa-glass-martini tm-page-link-icon"></i>
+                  <span>Special Items</span>
+                </a>
+              </li>
+              <li class="tm-page-nav-item">
+                <a href="#contact" class="tm-page-link">
+                  <i class="fas fa-comments tm-page-link-icon"></i>
+                  <span>Contact</span>
+                </a>
+              </li>
+            </ul>
+           <li class="tm-page-nav-item">
+          <a href="#login" class="tm-page-link">
+            <i class="fas fa-sign-in-alt tm-page-link-icon"></i>
+            <span>Login</span>
+          </a>
+          </li>
+          </nav>
+        </div>        
+      </div>
+      <div class="tm-right">
+        <main class="tm-main">
+          <div id="drink" class="tm-page-content">
+            <!-- Drink Menu Page -->
+            <nav class="tm-black-bg tm-drinks-nav">
+              <ul>
+                <li>
+                  <a href="#" class="tm-tab-link active" data-id="cold">Iced Coffee</a>
+                </li>
+                <li>
+                  <a href="#" class="tm-tab-link" data-id="hot">Hot Coffee</a>
+                </li>
+                <li>
+                  <a href="#" class="tm-tab-link" data-id="juice">Fruit Juice</a>
+                </li>
+              </ul>
+            </nav>
+
+            <div id="cold" class="tm-tab-content">
+              <div class="tm-list">
+                <div class="tm-list-item">          
+                  <img src="img/iced-americano.png" alt="Image" class="tm-list-item-img">
+                  <div class="tm-black-bg tm-list-item-text">
+                    <h3 class="tm-list-item-name">Iced Americano<span class="tm-list-item-price">$10.25</span></h3>
+                    <p class="tm-list-item-description">Here is a short description for the first item. Wave Cafe Template is provided by Tooplate.</p>
+                  </div>
                 </div>
-                <nav class="nav flex-column">
-                    <a href="index.html" class="nav-link text-white">Logout</a>
-                </nav>
+                <div class="tm-list-item">          
+                  <img src="img/iced-cappuccino.png" alt="Image" class="tm-list-item-img">
+                  <div class="tm-black-bg tm-list-item-text">
+                    <h3 class="tm-list-item-name">Iced Cappuccino<span class="tm-list-item-price">$12.50</span></h3>
+                    <p class="tm-list-item-description">Here is a list of 4 items or add more. You can use this template for commercial purposes.</p>
+                  </div>
+                </div>
+                <div class="tm-list-item">          
+                  <img src="img/iced-espresso.png" alt="Image" class="tm-list-item-img">
+                  <div class="tm-black-bg tm-list-item-text">
+                    <h3 class="tm-list-item-name">Iced Espresso<span class="tm-list-item-price">$14.25</span></h3>
+                    <p class="tm-list-item-description">You are not permitted to redistribute this template ZIP file on any other template websites.</p>
+                  </div>
+                </div>
+                <div class="tm-list-item">          
+                  <img src="img/iced-latte.png" alt="Image" class="tm-list-item-img">
+                  <div class="tm-black-bg tm-list-item-text">
+                    <h3 class="tm-list-item-name">Iced Latte<span class="tm-list-item-price">$11.50</span></h3>
+                    <p class="tm-list-item-description">Contents are organized into 3 tabs. Please <a href="https://www.tooplate.com/contact" rel="nofollow" target="_parent">contact Tooplate</a> if you have anything to ask.</p>
+                  </div>
+                </div> 
+                                       
+              </div>
+            </div> 
+
+            <div id="hot" class="tm-tab-content">
+              <div class="tm-list">
+              
+                <div class="tm-list-item">          
+                  <img src="img/hot-americano.png" alt="Image" class="tm-list-item-img">
+                  <div class="tm-black-bg tm-list-item-text">
+                    <h3 class="tm-list-item-name">Hot Americano<span class="tm-list-item-price">$8.50</span></h3>
+                    <p class="tm-list-item-description">Here is a short description for the item along with a squared thumbnail.</p>              
+                  </div>
+                </div>
+                <div class="tm-list-item">          
+                  <img src="img/hot-cappuccino.png" alt="Image" class="tm-list-item-img">
+                  <div class="tm-black-bg tm-list-item-text">
+                    <h3 class="tm-list-item-name">Hot Cappuccino<span class="tm-list-item-price">$9.50</span></h3>
+                    <p class="tm-list-item-description">Here is a list of 4 items that can add more as you need. Only content area will be scrolling.</p>                    
+                  </div>
+                </div>
+                <div class="tm-list-item">          
+                  <img src="img/hot-espresso.png" alt="Image" class="tm-list-item-img">
+                  <div class="tm-black-bg tm-list-item-text">
+                    <h3 class="tm-list-item-name">Hot Espresso<span class="tm-list-item-price">$7.50</span></h3>
+                    <p class="tm-list-item-description">Left side logo and main menu are fixed. The video background is fixed.</p>              
+                  </div>
+                </div>
+                <div class="tm-list-item">          
+                  <img src="img/hot-latte.png" alt="Image" class="tm-list-item-img">
+                  <div class="tm-black-bg tm-list-item-text">
+                    <h3 class="tm-list-item-name">Hot Latte<span class="tm-list-item-price">$6.50</span></h3>
+                    <p class="tm-list-item-description">Page contents are organized into 3 tabs to show different lists of items.</p>              
+                  </div>
+                         
+              </div>
             </div>
 
-            <!-- Main Content -->
-            <!-- Main Content -->
-<div class="col-md-9 col-lg-10 p-5">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2>Kelola Menu</h2>
-       <button class="admin-button" data-toggle="modal" data-target="#tambahMenuModal">
-    <i class="fas fa-plus mr-2"></i>Tambah Menu
-        </button>
-    </div>
-    <!-- Modal Tambah Menu -->
-<div class="modal fade" id="tambahMenuModal" tabindex="-1" role="dialog" aria-labelledby="tambahMenuModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-       <form action="proses_tambah_menu.php" method="POST" enctype="multipart/form-data">
-        <div class="modal-header">
-          <h5 class="modal-title" id="tambahMenuModalLabel">Tambah Menu Baru</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        
-        <div class="modal-body">
-          <div class="form-group">
-            <label for="namaMenu">Nama Menu</label>
-            <input type="text" class="form-control" id="namaMenu" placeholder="Contoh: Cappuccino">
+            <div id="juice" class="tm-tab-content">
+              <div class="tm-list">
+                <div class="tm-list-item">          
+                  <img src="img/smoothie-1.png" alt="Image" class="tm-list-item-img">
+                  <div class="tm-black-bg tm-list-item-text">
+                    <h3 class="tm-list-item-name">Strawberry Smoothie<span class="tm-list-item-price">$12.50</span></h3>
+                    <p class="tm-list-item-description">Here is a short description for the item along with a squared thumbnail.</p>              
+                  </div>
+                </div>
+                <div class="tm-list-item">          
+                  <img src="img/smoothie-2.png" alt="Image" class="tm-list-item-img">
+                  <div class="tm-black-bg tm-list-item-text">
+                    <h3 class="tm-list-item-name">Red Berry Smoothie<span class="tm-list-item-price">$14.50</span></h3>
+                    <p class="tm-list-item-description">Here is a list of 4 items or add more. You can use this template for commercial purposes.</p>                    
+                  </div>
+                </div>
+                <div class="tm-list-item">          
+                  <img src="img/smoothie-3.png" alt="Image" class="tm-list-item-img">
+                  <div class="tm-black-bg tm-list-item-text">
+                    <h3 class="tm-list-item-name">Pineapple Smoothie<span class="tm-list-item-price">$16.50</span></h3>
+                    <p class="tm-list-item-description">Left side logo and main menu are fixed. The video background is fixed.</p>              
+                  </div>
+                </div>
+                <div class="tm-list-item">          
+                  <img src="img/smoothie-4.png" alt="Image" class="tm-list-item-img">
+                  <div class="tm-black-bg tm-list-item-text">
+                    <h3 class="tm-list-item-name">Spinach Smoothie<span class="tm-list-item-price">$18.50</span></h3>
+                    <p class="tm-list-item-description">You are not allowed to redistribute the template ZIP file on other template sites.</p>              
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- end Drink Menu Page -->
           </div>
-          
-          <div class="form-group">
-            <label for="deskripsiMenu">Deskripsi</label>
-            <textarea class="form-control" id="deskripsiMenu" rows="3" placeholder="Deskripsi singkat menu"></textarea>
+
+          <!-- About Us Page -->
+          <div id="about" class="tm-page-content">
+            <div class="tm-black-bg tm-mb-20 tm-about-box-1">              
+              <h2 class="tm-text-primary tm-about-header">About Wave Cafe</h2>
+              <div class="tm-list-item tm-list-item-2">                
+                <img src="img/about-1.png" alt="Image" class="tm-list-item-img tm-list-item-img-big">
+                <div class="tm-list-item-text-2">
+                  <p>Wave Cafe is a one-page video background HTML CSS template from Tooplate. You can use this for your business websites.</p>
+                  <p>You can also use this for your client websites which you get paid for your website services. Please tell your friends about us.</p>
+                </div>                
+              </div>
+            </div>
+            <div class="tm-black-bg tm-mb-20 tm-about-box-2">              
+              <div class="tm-list-item tm-list-item-2">                
+                <div class="tm-list-item-text-2">
+                  <h2 class="tm-text-primary">How we began</h2>
+                  <p>If you wish to support us, please contact Tooplate. Thank you. Duis bibendum erat nec ipsum consectetur sodales.</p>                  
+                </div>                
+                <img src="img/about-2.png" alt="Image" class="tm-list-item-img tm-list-item-img-big tm-img-right">                
+              </div>
+              <p>Donec non urna elit. Quisque ut magna in dui mattis iaculis eu finibus metus. Suspendisse vel mi a lacus finibus vehicula vel ut diam. Nam pellentesque, mi quis ullamcorper.</p>
+            </div>
           </div>
-          
-          <div class="form-group">
-            <label for="hargaMenu">Harga (Rp)</label>
-            <input type="number" class="form-control" id="hargaMenu" placeholder="Contoh: 20000">
+          <!-- end About Us Page -->
+
+          <!-- Special Items Page -->
+          <div id="special" class="tm-page-content">
+            <div class="tm-special-items">
+              <div class="tm-black-bg tm-special-item">
+                <img src="img/special-01.jpg" alt="Image">
+                <div class="tm-special-item-description">
+                  <h2 class="tm-text-primary tm-special-item-title">Special One</h2>
+                  <p class="tm-special-item-text">Here is a short text description for the first special item. You are not allowed to redistribute this template ZIP file.</p>  
+                </div>
+              </div>
+              <div class="tm-black-bg tm-special-item">
+                <img src="img/special-02.jpg" alt="Image">
+                <div class="tm-special-item-description">
+                  <h2 class="tm-text-primary tm-special-item-title">Second Item</h2>
+                  <p class="tm-special-item-text">You are allowed to download, modify and use this template for your commercial or non-commercial websites.</p>  
+                </div>
+              </div>
+              <div class="tm-black-bg tm-special-item">
+                <img src="img/special-03.jpg" alt="Image">
+                <div class="tm-special-item-description">
+                  <h2 class="tm-text-primary tm-special-item-title">Third Special Item</h2>
+                  <p class="tm-special-item-text">Pellentesque in ultrices mi, quis mollis nulla. Quisque sed commodo est, quis tincidunt nunc.</p>  
+                </div>
+              </div>
+              <div class="tm-black-bg tm-special-item">
+                <img src="img/special-04.jpg" alt="Image">
+                <div class="tm-special-item-description">
+                  <h2 class="tm-text-primary tm-special-item-title">Special Item Fourth</h2>
+                  <p class="tm-special-item-text">Vivamus finibus nulla sed metus sagittis, sed ultrices magna aliquam. Mauris fermentum.</p>  
+                </div>
+              </div>      
+              <div class="tm-black-bg tm-special-item">
+                <img src="img/special-05.jpg" alt="Image">
+                <div class="tm-special-item-description">
+                  <h2 class="tm-text-primary tm-special-item-title">Sixth Sense</h2>
+                  <p class="tm-special-item-text">Here is a short text description for sixth item. This text is four lines.</p>  
+                </div>
+              </div>
+              <div class="tm-black-bg tm-special-item">
+                <img src="img/special-06.jpg" alt="Image">
+                <div class="tm-special-item-description">
+                  <h2 class="tm-text-primary tm-special-item-title">Seventh Item</h2>
+                  <p class="tm-special-item-text">Curabitur eget erat sit amet sapien aliquet vulputate quis sed arcu.</p>  
+                </div>
+              </div>
+              <div class="tm-black-bg tm-special-item">
+                <img src="img/ea698643-8672-4d09-bcc0-36562869a6d9.jpeg" alt="Image">
+                <div class="tm-special-item-description">
+                  <h2 class="tm-text-primary tm-special-item-title">Eighth Item</h2>
+                  <p class="tm-special-item-text">Delicious waffle topped with fresh strawberries and cream.</p>  
+                </div>
+            </div>
+         
+            </div>            
           </div>
-          
-          <div class="form-group">
-            <label for="gambarMenu">Gambar Menu</label>
-            <input type="file" class="form-control-file" id="gambarMenu">
+          <!-- end Special Items Page -->
+
+          <!-- Contact Page -->
+          <div id="contact" class="tm-page-content">
+            <div class="tm-black-bg tm-contact-text-container">
+              <h2 class="tm-text-primary">Contact Wave</h2>
+              <p>Wave Cafe Template has a video background. You can use this layout for your websites. Please contact Tooplate's Facebook page. Tell your friends about our website.</p>
+            </div>
+            <div class="tm-black-bg tm-contact-form-container tm-align-right">
+              <form action="" method="POST" id="contact-form">
+                <div class="tm-form-group">
+                  <input type="text" name="name" class="tm-form-control" placeholder="Name" required="" />
+                </div>
+                <div class="tm-form-group">
+                  <input type="email" name="email" class="tm-form-control" placeholder="Email" required="" />
+                </div>        
+                <div class="tm-form-group tm-mb-30">
+                  <textarea rows="6" name="message" class="tm-form-control" placeholder="Message" required=""></textarea>
+                </div>        
+                <div>
+                  <button type="submit" class="tm-btn-primary tm-align-right">
+                    Submit
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
-        </div>
-        
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-          <button type="submit" class="btn btn-primary">Simpan Menu</button>
-        </div>
-      </form>
-    </div>
+    <div id="login" class="tm-page-content" style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+  <div class="tm-black-bg tm-contact-form-container tm-align-center" style="background-color: #333; padding: 30px; border-radius: 10px;">
+    <h2 class="tm-text-primary" style="color: #fff; text-align: center;">Login</h2>
+    
+    <form id="loginForm" style="display: flex; flex-direction: column; align-items: center ;">
+      <form id="loginForm" onsubmit="handleLogin(event)">
+
+      <label for="username" style="color: #fff; margin-bottom: 8px;">Username:</label>
+      <input type="text" id="username" required style="padding: 10px; margin-bottom: 15px; width: 200px; border-radius: 5px; border: 1px solid #ccc;">
+      
+      <label for="password" style="color: #fff; margin-bottom: 8px;">Password:</label>
+      <input type="password" id="password" required style="padding: 10px; margin-bottom: 15px; width: 200px; border-radius: 5px; border: 1px solid #ccc;">
+      
+      <button type="submit" style="padding: 10px; width: 200px; background-color: #4CAF50; border: none; color: white; border-radius: 5px;">Login</button>
+    </form>
   </div>
 </div>
 
+<!-- Script login -->
+<script>
+  document.getElementById("loginForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // Hindari reload form
 
-    <div class="row">
-        <!-- Menu 1 -->
-        <div class="col-md-4 mb-4">
-            <div class="tm-gallery-item">
-                <img src="img/hot-espresso.png" alt="Espresso" class="img-fluid rounded mb-3">
-                <h3 class="h5">Espresso</h3>
-                <p>Kopi pekat khas Italia dengan cita rasa kuat.</p>
-                <p><strong>Rp 15.000</strong></p>
-                <button class="admin-button">Edit</button>
-                <button class="admin-button">Hapus</button>
-            </div>
-        </div>
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
 
-        <!-- Menu 2 -->
-        <div class="col-md-4 mb-4">
-            <div class="tm-gallery-item">
-                <img src="img/hot-cappuccino.png" alt="Cappuccino" class="img-fluid rounded mb-3">
-                <h3 class="h5">Cappuccino</h3>
-                <p>Kombinasi espresso dan susu berbuih.</p>
-                <p><strong>Rp 20.000</strong></p>
-                <button class="admin-button">Edit</button>
-                <button class="admin-button">Hapus</button>
-            </div>
-        </div>
+    // Ganti sesuai kredensial admin kamu
+    if (username === "admin" && password === "admin123") {
+      // Login berhasil → Redirect ke halaman kelola menu
+      window.location.href = "kelolamenu.html";
+    } else {
+      alert("Username atau password salah!");
+    }
+  });
+</script>
 
-        <!-- Menu 3 -->
-        <div class="col-md-4 mb-4">
-            <div class="tm-gallery-item">
-                <img src="img/iced-latte.png" alt="Latte" class="img-fluid rounded mb-3">
-                <h3 class="h5">Latte</h3>
-                <p>Minuman kopi lembut dengan susu hangat.</p>
-                <p><strong>Rp 18.000</strong></p>
-                <button class="admin-button">Edit</button>
-                <button class="admin-button">Hapus</button>
-            </div>
-        </div>
+
+
+<!-- end Contact Page -->
+        </main>
+      </div>    
     </div>
-</div>
+    <footer class="tm-site-footer">
+      <p class="tm-black-bg tm-footer-text">Copyright 2020 Wave Cafe
+      
+      | Design: <a href="https://www.tooplate.com" class="tm-footer-link" rel="sponsored" target="_parent">Tooplate</a></p>
+    </footer>
+  </div>
+    
+  <!-- Background video -->
+  <div class="tm-video-wrapper">
+      <i id="tm-video-control-button" class="fas fa-pause"></i>
+      <video autoplay muted loop id="tm-video">
+          <source src="video/wave-cafe-video-bg.mp4" type="video/mp4">
+      </video>
+  </div>
 
+  <script src="js/jquery-3.4.1.min.js"></script>    
+  <script>
 
-    <!-- Background video -->
-    <div class="tm-video-wrapper">
-        <i id="tm-video-control-button" class="fas fa-pause"></i>
-        <video autoplay muted loop id="tm-video">
-            <source src="video/wave-cafe-video-bg.mp4" type="video/mp4">
-        </video>
-    </div>
+    function setVideoSize() {
+      const vidWidth = 1920;
+      const vidHeight = 1080;
+      const windowWidth = window.innerWidth;
+      const windowHeight = window.innerHeight;
+      const tempVidWidth = windowHeight * vidWidth / vidHeight;
+      const tempVidHeight = windowWidth * vidHeight / vidWidth;
+      const newVidWidth = tempVidWidth > windowWidth ? tempVidWidth : windowWidth;
+      const newVidHeight = tempVidHeight > windowHeight ? tempVidHeight : windowHeight;
+      const tmVideo = $('#tm-video');
 
-    <!-- Add Bootstrap JS and jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
-    <script>
-        function setVideoSize() {
-            const vidWidth = 1920;
-            const vidHeight = 1080;
-            const windowWidth = window.innerWidth;
-            const windowHeight = window.innerHeight;
-            const tempVidWidth = windowHeight * vidWidth / vidHeight;
-            const tempVidHeight = windowWidth * vidHeight / vidWidth;
-            const newVidWidth = tempVidWidth > windowWidth ? tempVidWidth : windowWidth;
-            const newVidHeight = tempVidHeight > windowHeight ? tempVidHeight : windowHeight;
-            const tmVideo = $('#tm-video');
+      tmVideo.css('width', newVidWidth);
+      tmVideo.css('height', newVidHeight);
+    }
 
-            tmVideo.css('width', newVidWidth);
-            tmVideo.css('height', newVidHeight);
+    function openTab(evt, id) {
+      $('.tm-tab-content').hide();
+      $('#' + id).show();
+      $('.tm-tab-link').removeClass('active');
+      $(evt.currentTarget).addClass('active');
+    }    
+
+    function initPage() {
+      let pageId = location.hash;
+
+      if(pageId) {
+        highlightMenu($('.tm-page-link'[href^="${pageId}"])); 
+        showPage($(pageId));
+      }
+      else {
+        pageId = $('.tm-page-link.active').attr('href');
+        showPage($(pageId));
+      }
+    }
+
+    function highlightMenu(menuItem) {
+      $('.tm-page-link').removeClass('active');
+      menuItem.addClass('active');
+    }
+
+    function showPage(page) {
+      $('.tm-page-content').hide();
+      page.show();
+    }
+
+    $(document).ready(function(){
+
+      /***************** Pages *****************/
+
+      initPage();
+
+      $('.tm-page-link').click(function(event) {
+        
+        if(window.innerWidth > 991) {
+          event.preventDefault();
         }
 
-        $(document).ready(function(){
-            setVideoSize();
-            let timeout;
-            window.onresize = function(){
-                clearTimeout(timeout);
-                timeout = setTimeout(setVideoSize, 100);
-            };
+        highlightMenu($(event.currentTarget));
+        showPage($(event.currentTarget.hash));
+      });
 
-            const btn = $("#tm-video-control-button");
-            btn.on("click", function(e) {
-                const video = document.getElementById("tm-video");
-                $(this).removeClass();
+      
+      /***************** Tabs *******************/
 
-                if (video.paused) {
-                    video.play();
-                    $(this).addClass("fas fa-pause");
-                } else {
-                    video.pause();
-                    $(this).addClass("fas fa-play");
-                }
-            });
-        });
+      $('.tm-tab-link').on('click', e => {
+        e.preventDefault(); 
+        openTab(e, $(e.target).data('id'));
+      });
+
+      $('.tm-tab-link.active').click(); // Open default tab
+
+
+      /************** Video background *********/
+
+      setVideoSize();
+
+      // Set video background size based on window size
+      let timeout;
+      window.onresize = function(){
+        clearTimeout(timeout);
+        timeout = setTimeout(setVideoSize, 100);
+      };
+
+      // Play/Pause button for video background      
+      const btn = $("#tm-video-control-button");
+
+      btn.on("click", function(e) {
+        const video = document.getElementById("tm-video");
+        $(this).removeClass();
+
+        if (video.paused) {
+          video.play();
+          $(this).addClass("fas fa-pause");
+        } else {
+          video.pause();
+          $(this).addClass("fas fa-play");
+        }
+      });
+    });
+      
+
+    function handleLogin(e) {
+      e.preventDefault();
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+
+      // Contoh validasi dummy
+      if (username === "admin" && password === "1234") {
+        alert("Login sukses!");
+        // Redirect atau tampilkan halaman admin
+      } else {
+        alert("Username atau password salah.");
+      }
+    }
     </script>
+
 </body>
-
-
-
 </html>
-

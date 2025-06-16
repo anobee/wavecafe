@@ -1,35 +1,33 @@
 <?php
 session_start();
 
-$host = "localhost";
-$user = "root";
-$pass = "";
-$db   = "wavecafe";
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $username = $_POST['username'] ?? '';
+    $password = $_POST['password'] ?? '';
 
-$conn = mysqli_connect($host, $user, $pass, $db);
-if (!$conn) die("Koneksi gagal: " . mysqli_connect_error());
+    $conn = new mysqli('localhost', 'root', '', 'wavecafe');
+    if ($conn->connect_error) {
+        die('Database connection failed: ' . $conn->connect_error);
+    }
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+    $stmt = $conn->prepare("SELECT * FROM users WHERE username=? AND password=?");
+    $stmt->bind_param("ss", $username, $password);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $user = $result->fetch_assoc();
 
-    $sql = "SELECT * FROM pengguna WHERE username='$username' AND password='$password'";
-    $result = mysqli_query($conn, $sql);
-
-    if (mysqli_num_rows($result) === 1) {
-        $user = mysqli_fetch_assoc($result);
+    if ($user) {
         $_SESSION['username'] = $user['username'];
         $_SESSION['role'] = $user['role'];
-
-        // Redirect berdasarkan role
-        if ($user['role'] === 'admin') {
-            header("Location: kelolamenu.html");
+        if ($user['role'] == 'admin') {
+            header('Location: kelolamenu.php');
+            exit;
         } else {
-            header("Location: index.php");
+            header('Location: index.php');
+            exit;
         }
-        exit;
     } else {
-        echo "<script>alert('Login gagal'); window.location='login.php';</script>";
+        $error = "Username atau password salah!";
     }
 }
 ?>
@@ -50,6 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <body>
   <form method="POST" class="box">
     <h2>Login</h2>
+    <?php if (isset($error)) echo "<p style='color:red;'>$error</p>"; ?>
     <input type="text" name="username" placeholder="Username" required />
     <input type="password" name="password" placeholder="Password" required />
     <button type="submit">Masuk</button>
